@@ -39,8 +39,9 @@ public class Principal{
 
         // El usuario escoge que tipo de map utilizar
         FactoryMap<String, ArrayList<String>> factory = new FactoryMap<String, ArrayList<String>>();
-        AbstractMap<String, ArrayList<String>> myCollection;
-        AbstractMap<String, ArrayList<String>> Inventario;
+        Map<String, List<String>> myCollection;
+        Map<String, List<String>> Inventario;
+
         System.out.println("\n Escoge que tipo de implementacion de map deseas usar: ");
         System.out.println(" 1) HashMap   2) TreeMap   3) LinkedHashMap ");
         tipo = teclado.nextLine();
@@ -49,43 +50,41 @@ public class Principal{
         Inventario = factory.getMap(tipo);
 
         //  Se crea el inventario
-        ArrayList<String> muebles = new ArrayList<>();
+        List<String> muebles = new ArrayList<>();
         muebles.add("Mesas de jardin");
         muebles.add("Sillas de jardin");
         muebles.add("Conjuntos mesas y sillas de jardin");
         muebles.add("Mesas de Ping Pong exteriores");
-        System.out.println(tipo);
-        System.out.println(Inventario);
         Inventario.put("Muebles de terraza", muebles);
         
-        ArrayList<String> sillones = new ArrayList<>();
+        List<String> sillones = new ArrayList<>();
         sillones.add("Cojines y colchonetas de masaje");
         sillones.add("Sillones relax y sofas de masajes");
         sillones.add("Sillones de masajes avanzados");
         sillones.add("Sofas camas");
         Inventario.put("Sillones de masaje", sillones);
 
-        ArrayList<String> bebidas = new ArrayList<>();
+        List<String> bebidas = new ArrayList<>();
         bebidas.add("Cerveza tibetana Barley");
         bebidas.add("Te frios");
         bebidas.add("Coca cola 1 litro");
         bebidas.add("Coca cola 2 litros");
         Inventario.put("Bebidas", bebidas);
 
-        ArrayList<String> condimentos = new ArrayList<>();
+        List<String> condimentos = new ArrayList<>();
         condimentos.add("Sirope de regaliz");
         condimentos.add("Especies Cajun del chef");
         condimentos.add("Mezcla Gumbo del chef");
         Inventario.put("Condimentos", condimentos);
 
-        ArrayList<String> frutas = new ArrayList<>();
+        List<String> frutas = new ArrayList<>();
         frutas.add("Peras secas");
         frutas.add("Pasas");
         frutas.add("Manzana roja");
         frutas.add("Manzana verde");
         Inventario.put("Frutas", frutas);
 
-        ArrayList<String> carnes = new ArrayList<>();
+        List<String> carnes = new ArrayList<>();
         carnes.add("Res");
         carnes.add("Pollo");
         carnes.add("Cerdo");
@@ -93,17 +92,13 @@ public class Principal{
         carnes.add("Pescados");
         Inventario.put("Carnes", carnes);
 
-        ArrayList<String> lacteos = new ArrayList<>();
+        List<String> lacteos = new ArrayList<>();
         lacteos.add("Queso de cabra");
         lacteos.add("Queso Manchego");
         lacteos.add("Leche descremada");
         lacteos.add("Leche deslactosada");
         lacteos.add("Leche entera");
         Inventario.put("Lacteos", lacteos);
-
-        for (Map.Entry<String, ArrayList<String>> entry : Inventario.entrySet()) {
-		    System.out.println(entry.getKey()+" = "+entry.getValue());
-		}
 
         // Menu de opciones
         while(continuar == false){
@@ -115,7 +110,7 @@ public class Principal{
             System.out.println(" 4. Mostrar los datos, categoria y cantidad de cada articulo en la coleccion, ordenada por tipo ");
             System.out.println(" 5. Mostrar el producto y la categoria de todo el inventario ");
             System.out.println(" 6. Mostrar el producto y la categoria existentes, ordenadas por tipo");
-            System.out.println(" 7. Visualizar la lista de articulos");
+            System.out.println(" 7. Visualizar la lista de articulos disponibles");
             System.out.println(" 8. Salir ");
 
             System.out.println("\n Porfavor elige una opcion: ");
@@ -125,13 +120,56 @@ public class Principal{
 
                 case 1:
 
-                    
+                    // Agrega un producto al carrito o coleccion del usuario
+                    System.out.println(" Ingresa el nombre de la categoria: ");
+                    String categoria = teclado.nextLine();
+                    if(Inventario.containsKey(categoria)){
 
+                        System.out.println(" Ingresa el nombre del producto que deseas agregar: ");
+                        String prod = teclado.nextLine();
+                        List<String> producto = new ArrayList<>();
+
+                        String busqueda = prod;
+                        for (Map.Entry<String, List<String>> entry : Inventario.entrySet()) {
+                            List<String> values = entry.getValue();
+                            if (values.contains(busqueda)) {
+                                producto.add(prod);
+                                myCollection.put(categoria, producto);
+                                System.out.println("Producto agregado al carrito");
+                            }
+                        }
+                        
+                    }
+                    else{
+                        System.out.println(" Error, la categoria no existe ");
+                    }
 
                 break;
 
                 case 2:
-                    //
+                    // Busca la categoria del producto ingresado
+                    
+                    System.out.println(" Ingresa el nombre del producto: ");
+                    String prod = teclado.nextLine();
+                    String isfound = null;
+
+                    for(String key : Inventario.keySet()){
+
+                        List<String> values = Inventario.get(key);
+
+                        if(values.contains(prod)){
+                            isfound = key;
+                            break;
+                        }
+
+                    }
+
+                    if(isfound != null){
+                        System.out.println("El producto pertenece a la categoria " + isfound);
+                    }else{
+                        System.out.println("La categoria no existe");
+                    }
+
                 break;
 
                 case 3:
@@ -151,15 +189,10 @@ public class Principal{
                 break;
 
                 case 7:
-
-                    // Imprime la lista de articulos para que el usuario pueda verla
-                    System.out.println("\n ..:: Lista de articulos ::..  \n");
-                    for(int i = 0; i < lineasArchivo.size(); i++){
-                        System.out.println(lineasArchivo.get(i));
-                        if(i == 3 || i == 7 || i == 11 || i == 14 || i == 18 || i == 23 || i == 28){
-                            System.out.println("\n");
-                        }
-                    }
+ 
+                for (Map.Entry<String, List<String>> entry : Inventario.entrySet()) {
+		            System.out.println(entry.getKey()+" : "+entry.getValue());
+		        }
 
                 break;
 

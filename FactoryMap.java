@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeMap;
 import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.List;
 
 /*
  * Marcos Diaz (221102)
@@ -11,21 +13,21 @@ import java.util.LinkedHashMap;
  */
 
 public class FactoryMap<K,V>{
-    
+
     // Metodo que obtiene un map segun se haya indicado
-    public AbstractMap<K,V> getMap(String tipo){
+    public Map<String, List<String>> getMap(String tipo){
 
         if (tipo == null){
             return null;
         }
         if(tipo.equalsIgnoreCase("HashMap")){
-            return;
+            return new HashMap<>();
         }   
         if(tipo.equalsIgnoreCase("TreeMap")){
-            return ;
+            return new TreeMap<>();
         }
         if(tipo.equalsIgnoreCase("LinkedHashMap")){
-            return;
+            return new LinkedHashMap<>();
         }
 
         return null;
