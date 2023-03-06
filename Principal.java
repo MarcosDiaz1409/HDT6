@@ -31,19 +31,77 @@ public class Principal{
             e.printStackTrace();
         }
 
+
         boolean continuar = false;
         Scanner teclado = new Scanner(System.in);
         int opcion = 0;
         String tipo;
 
         // El usuario escoge que tipo de map utilizar
-        FactoryMap<String,Integer> factory = new FactoryMap<String, Integer>();
-        AbstractMap<String,Integer> myCollection;
+        FactoryMap<String, ArrayList<String>> factory = new FactoryMap<String, ArrayList<String>>();
+        AbstractMap<String, ArrayList<String>> myCollection;
+        AbstractMap<String, ArrayList<String>> Inventario;
         System.out.println("\n Escoge que tipo de implementacion de map deseas usar: ");
         System.out.println(" 1) HashMap   2) TreeMap   3) LinkedHashMap ");
         tipo = teclado.nextLine();
         
         myCollection = factory.getMap(tipo);
+        Inventario = factory.getMap(tipo);
+
+        //  Se crea el inventario
+        ArrayList<String> muebles = new ArrayList<String>();
+        muebles.add("Mesas de jardin");
+        muebles.add("Sillas de jardin");
+        muebles.add("Conjuntos mesas y sillas de jardin");
+        muebles.add("Mesas de Ping Pong exteriores");
+        Inventario.put("Muebles de terraza", muebles);
+        
+        ArrayList<String> sillones = new ArrayList<String>();
+        sillones.add("Cojines y colchonetas de masaje");
+        sillones.add("Sillones relax y sofas de masajes");
+        sillones.add("Sillones de masajes avanzados");
+        sillones.add("Sofas camas");
+        Inventario.put("Sillones de masaje", sillones);
+
+        ArrayList<String> bebidas = new ArrayList<String>();
+        bebidas.add("Cerveza tibetana Barley");
+        bebidas.add("Te frios");
+        bebidas.add("Coca cola 1 litro");
+        bebidas.add("Coca cola 2 litros");
+        Inventario.put("Bebidas", bebidas);
+
+        ArrayList<String> condimentos = new ArrayList<String>();
+        condimentos.add("Sirope de regaliz");
+        condimentos.add("Especies Cajun del chef");
+        condimentos.add("Mezcla Gumbo del chef");
+        Inventario.put("Condimentos", condimentos);
+
+        ArrayList<String> frutas = new ArrayList<String>();
+        frutas.add("Peras secas");
+        frutas.add("Pasas");
+        frutas.add("Manzana roja");
+        frutas.add("Manzana verde");
+        Inventario.put("Frutas", frutas);
+
+        ArrayList<String> carnes = new ArrayList<String>();
+        carnes.add("Res");
+        carnes.add("Pollo");
+        carnes.add("Cerdo");
+        carnes.add("Camarones");
+        carnes.add("Pescados");
+        Inventario.put("Carnes", carnes);
+
+        ArrayList<String> lacteos = new ArrayList<String>();
+        lacteos.add("Queso de cabra");
+        lacteos.add("Queso Manchego");
+        lacteos.add("Leche descremada");
+        lacteos.add("Leche deslactosada");
+        lacteos.add("Leche entera");
+        Inventario.put("Lacteos", lacteos);
+
+        for (Map.Entry<String, ArrayList<String>> entry : Inventario.entrySet()) {
+		    System.out.println(entry.getKey()+" = "+entry.getValue());
+		}
 
         // Menu de opciones
         while(continuar == false){
@@ -64,7 +122,10 @@ public class Principal{
             switch(opcion){
 
                 case 1:
-                    //
+
+                    
+
+
                 break;
 
                 case 2:

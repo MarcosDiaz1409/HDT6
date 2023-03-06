@@ -17,16 +17,19 @@ public class HashMap<K,V> extends AbstractMap<K,V>{
         return map.put(key, value);
     }
 
+    @Override
     // Metodo que devuelve el valor de una determinada llave
     public V get(K key){
         return map.get(key);
     }
 
+    @Override
     // Metodo que verifica si el hashmap esta vacio
     public boolean isEmpty(){
         return map.isEmpty();
     }
 
+    @Override
     // Metodo que devuelve un valor int con el tamaño del hashmap
     public int size() {
         return map.size();
