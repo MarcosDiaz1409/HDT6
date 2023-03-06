@@ -1,3 +1,8 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.TreeMap;
+import java.util.LinkedHashMap;
+
 /*
  * Marcos Diaz (221102)
  * Hoja de trabajo #6
@@ -14,13 +19,13 @@ public class FactoryMap<K,V>{
             return null;
         }
         if(tipo.equalsIgnoreCase("HashMap")){
-            return new HashMap<K,V>();
-        }
+            return;
+        }   
         if(tipo.equalsIgnoreCase("TreeMap")){
-            return new TreeMap<K,V>();
+            return ;
         }
         if(tipo.equalsIgnoreCase("LinkedHashMap")){
-            return new LinkedHashMap<K,V>();
+            return;
         }
 
         return null;

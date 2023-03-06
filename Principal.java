@@ -49,41 +49,43 @@ public class Principal{
         Inventario = factory.getMap(tipo);
 
         //  Se crea el inventario
-        ArrayList<String> muebles = new ArrayList<String>();
+        ArrayList<String> muebles = new ArrayList<>();
         muebles.add("Mesas de jardin");
         muebles.add("Sillas de jardin");
         muebles.add("Conjuntos mesas y sillas de jardin");
         muebles.add("Mesas de Ping Pong exteriores");
+        System.out.println(tipo);
+        System.out.println(Inventario);
         Inventario.put("Muebles de terraza", muebles);
         
-        ArrayList<String> sillones = new ArrayList<String>();
+        ArrayList<String> sillones = new ArrayList<>();
         sillones.add("Cojines y colchonetas de masaje");
         sillones.add("Sillones relax y sofas de masajes");
         sillones.add("Sillones de masajes avanzados");
         sillones.add("Sofas camas");
         Inventario.put("Sillones de masaje", sillones);
 
-        ArrayList<String> bebidas = new ArrayList<String>();
+        ArrayList<String> bebidas = new ArrayList<>();
         bebidas.add("Cerveza tibetana Barley");
         bebidas.add("Te frios");
         bebidas.add("Coca cola 1 litro");
         bebidas.add("Coca cola 2 litros");
         Inventario.put("Bebidas", bebidas);
 
-        ArrayList<String> condimentos = new ArrayList<String>();
+        ArrayList<String> condimentos = new ArrayList<>();
         condimentos.add("Sirope de regaliz");
         condimentos.add("Especies Cajun del chef");
         condimentos.add("Mezcla Gumbo del chef");
         Inventario.put("Condimentos", condimentos);
 
-        ArrayList<String> frutas = new ArrayList<String>();
+        ArrayList<String> frutas = new ArrayList<>();
         frutas.add("Peras secas");
         frutas.add("Pasas");
         frutas.add("Manzana roja");
         frutas.add("Manzana verde");
         Inventario.put("Frutas", frutas);
 
-        ArrayList<String> carnes = new ArrayList<String>();
+        ArrayList<String> carnes = new ArrayList<>();
         carnes.add("Res");
         carnes.add("Pollo");
         carnes.add("Cerdo");
@@ -91,7 +93,7 @@ public class Principal{
         carnes.add("Pescados");
         Inventario.put("Carnes", carnes);
 
-        ArrayList<String> lacteos = new ArrayList<String>();
+        ArrayList<String> lacteos = new ArrayList<>();
         lacteos.add("Queso de cabra");
         lacteos.add("Queso Manchego");
         lacteos.add("Leche descremada");
