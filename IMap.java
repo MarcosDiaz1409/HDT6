@@ -23,5 +23,8 @@ public interface IMap<K,V>{
 
     // Muestra todos los elementos que contiene el map
     Set<Map.Entry<K,V>> entrySet();
+
+    // Verifica si el valor se encuentra en alguna de las llaves
+    public boolean containsValue(V value);
     
 }

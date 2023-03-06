@@ -35,4 +35,8 @@ public abstract class AbstractMap<K,V> implements IMap<K,V>{
     @Override
     public abstract Set<Map.Entry<K,V>> entrySet();
 
+    // Verifica si el valor se encuentra en alguna de las llaves
+    @Override
+    public abstract boolean containsValue(V value);
+
 }

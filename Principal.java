@@ -38,12 +38,12 @@ public class Principal{
 
         // El usuario escoge que tipo de map utilizar
         FactoryMap<String,Integer> factory = new FactoryMap<String, Integer>();
-        AbstractMap<String,Integer> map;
+        AbstractMap<String,Integer> myCollection;
         System.out.println("\n Escoge que tipo de implementacion de map deseas usar: ");
         System.out.println(" 1) HashMap   2) TreeMap   3) LinkedHashMap ");
         tipo = teclado.nextLine();
         
-        map = factory.getMap(tipo);
+        myCollection = factory.getMap(tipo);
 
         // Menu de opciones
         while(continuar == false){

@@ -37,5 +37,12 @@ public class LinkedHashMap<K,V> extends AbstractMap<K,V>{
     public Set<Map.Entry<K, V>> entrySet() {
         return map.entrySet();
     }
+
+    // Verifica si el valor se encuentra en alguna de las llaves
+    @Override
+    public boolean containsValue(V value){
+        return map.containsValue(value);
+    }
+
     
 }

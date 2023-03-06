@@ -38,4 +38,10 @@ public class HashMap<K,V> extends AbstractMap<K,V>{
         return map.entrySet();
     }
 
+    // Verifica si el valor se encuentra en alguna de las llaves
+    @Override
+    public boolean containsValue(V value){
+        return map.containsValue(value);
+    }
+
 }
