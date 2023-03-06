@@ -1,3 +1,5 @@
+import java.util.*;
+
 /*
  * Marcos Diaz (221102)
  * Hoja de trabajo #6
@@ -7,16 +9,19 @@
 
 public interface IMap<K,V>{
 
-    // Metodo que inserta un valor con su llave al hashmap
+    // Metodo que inserta un valor con su llave al map
     V put(K key, V value);
 
     // Metodo que verifica si el hashmap esta vacio
     boolean isEmpty();
 
-    // Metodo que devuelve un valor int con el tamaño del hashmap
+    // Metodo que devuelve un valor int con el tamaño del map
     int size();
 
     // Metodo que devuelve el valor de una determinada llave
     V get(K key);
+
+    // Muestra todos los elementos que contiene el map
+    Set<Map.Entry<K,V>> entrySet();
     
 }

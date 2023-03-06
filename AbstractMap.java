@@ -1,3 +1,5 @@
+import java.util.*;
+
 /*
  * Marcos Diaz (221102)
  * Hoja de trabajo #6
@@ -29,6 +31,8 @@ public abstract class AbstractMap<K,V> implements IMap<K,V>{
     @Override
     public abstract V get(K key);
 
-
+    // Muestra todos los elementos que contiene el map
+    @Override
+    public abstract Set<Map.Entry<K,V>> entrySet();
 
 }
