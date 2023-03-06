@@ -1,5 +1,7 @@
 import java.util.*;
-import java.util.Scanner;
+
+import javax.print.DocFlavor.INPUT_STREAM;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -55,7 +57,7 @@ public class Principal{
         muebles.add("Sillas de jardin");
         muebles.add("Conjuntos mesas y sillas de jardin");
         muebles.add("Mesas de Ping Pong exteriores");
-        Inventario.put("Muebles de terraza", muebles);
+        Inventario.put("Mueble de terraza", muebles);
         
         List<String> sillones = new ArrayList<>();
         sillones.add("Cojines y colchonetas de masaje");
@@ -66,7 +68,7 @@ public class Principal{
 
         List<String> bebidas = new ArrayList<>();
         bebidas.add("Cerveza tibetana Barley");
-        bebidas.add("Te frios");
+        bebidas.add("Te frio");
         bebidas.add("Coca cola 1 litro");
         bebidas.add("Coca cola 2 litros");
         Inventario.put("Bebidas", bebidas);
@@ -110,8 +112,7 @@ public class Principal{
             System.out.println(" 4. Mostrar los datos, categoria y cantidad de cada articulo en la coleccion, ordenada por tipo ");
             System.out.println(" 5. Mostrar el producto y la categoria de todo el inventario ");
             System.out.println(" 6. Mostrar el producto y la categoria existentes, ordenadas por tipo");
-            System.out.println(" 7. Visualizar la lista de articulos disponibles");
-            System.out.println(" 8. Salir ");
+            System.out.println(" 7. Salir ");
 
             System.out.println("\n Porfavor elige una opcion: ");
             opcion = Integer.parseInt(teclado.nextLine());
@@ -127,15 +128,17 @@ public class Principal{
 
                         System.out.println(" Ingresa el nombre del producto que deseas agregar: ");
                         String prod = teclado.nextLine();
-                        List<String> producto = new ArrayList<>();
 
                         String busqueda = prod;
                         for (Map.Entry<String, List<String>> entry : Inventario.entrySet()) {
                             List<String> values = entry.getValue();
                             if (values.contains(busqueda)) {
-                                producto.add(prod);
-                                myCollection.put(categoria, producto);
+
+                                myCollection.putIfAbsent(categoria, new ArrayList<String>());
+                                myCollection.get(categoria).add(prod);    
                                 System.out.println("Producto agregado al carrito");
+                                    
+
                             }
                         }
                         
@@ -173,31 +176,86 @@ public class Principal{
                 break;
 
                 case 3:
-                    //
+
+                    //Muestra el carrito del usuario
+                    Map<String,Integer> conteo = new HashMap<>();
+                    for(List<String> valores : myCollection.values()){
+                        for(String valor : valores){
+                            Integer cont = conteo.get(valor);
+                        
+                            if(cont == null){
+                                cont = 0;
+                            }
+                            conteo.put(valor, cont + 1);
+
+                        }
+                    }
+
+
                 break;                
 
                 case 4:
-                    //
+                    // Muestra el carrito del usuario donde las categorias estan ordenadas
+                    if(myCollection instanceof HashMap){
+
+                        Map<String, List<String>> ColeccionOrdenada = new TreeMap<String, List<String>>(myCollection);
+                        for (Map.Entry<String, List<String>> entry : ColeccionOrdenada.entrySet()) {
+                            System.out.println(entry.getKey()+" : "+entry.getValue());
+                        }
+
+                    }else if(myCollection instanceof TreeMap){
+
+                        for (Map.Entry<String, List<String>> entry : myCollection.entrySet()) {
+                            System.out.println(entry.getKey()+" : "+entry.getValue());
+                        }
+
+                    }else if(myCollection instanceof LinkedHashMap){
+
+                        Map<String, List<String>> ColeccionOrdenada = new TreeMap<String, List<String>>(myCollection);
+                        for (Map.Entry<String, List<String>> entry : ColeccionOrdenada.entrySet()) {
+                            System.out.println(entry.getKey()+" : "+entry.getValue());
+                        }
+                        
+                    }
+
                 break;
 
                 case 5:
-                    //
-                break; 
-                
-                case 6:
-                    //
-                break;
-
-                case 7:
- 
+                    
                 for (Map.Entry<String, List<String>> entry : Inventario.entrySet()) {
 		            System.out.println(entry.getKey()+" : "+entry.getValue());
 		        }
 
+                break; 
+                
+                case 6:
+                    // Muestras todas las categorias del inventario ordenadas por orden alfabetico
+                    if(Inventario instanceof HashMap){
+
+                        Map<String, List<String>> InventarioOrdenado = new TreeMap<String, List<String>>(Inventario);
+                        for (Map.Entry<String, List<String>> entry : InventarioOrdenado.entrySet()) {
+                            System.out.println(entry.getKey()+" : "+entry.getValue());
+                        }
+
+                    }else if(Inventario instanceof TreeMap){
+
+                        for (Map.Entry<String, List<String>> entry : Inventario.entrySet()) {
+                            System.out.println(entry.getKey()+" : "+entry.getValue());
+                        }
+
+                    }else if(Inventario instanceof LinkedHashMap){
+
+                        Map<String, List<String>> InventarioOrdenado = new TreeMap<String, List<String>>(Inventario);
+                        for (Map.Entry<String, List<String>> entry : InventarioOrdenado.entrySet()) {
+                            System.out.println(entry.getKey()+" : "+entry.getValue());
+                        }
+
+                    }
+
                 break;
 
-                case 8:
-
+                case 7:
+ 
                     System.out.println(" Gracias por utilizar el programa ");
                     continuar = true;
 
