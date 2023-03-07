@@ -10,7 +10,7 @@ import java.io.IOException;
 /*
  * Marcos Diaz (221102)
  * Hoja de trabajo #6
- * 05/03/2023
+ * 06/03/2023
  * Clase principal donde el usuario interactua con el programa
  */
 
@@ -44,8 +44,9 @@ public class Principal{
         Map<String, List<String>> myCollection;
         Map<String, List<String>> Inventario;
 
-        System.out.println("\n Escoge que tipo de implementacion de map deseas usar: ");
-        System.out.println(" 1) HashMap   2) TreeMap   3) LinkedHashMap ");
+        System.out.println("\nEscoge que tipo de implementacion de map deseas usar: ");
+        System.out.println("NOTA: Escribe tu tipo de implementacion deseada tal como aparece en el siguiente mensaje ");
+        System.out.println("1) HashMap   2) TreeMap   3) LinkedHashMap ");
         tipo = teclado.nextLine();
         
         myCollection = factory.getMap(tipo);
@@ -122,11 +123,11 @@ public class Principal{
                 case 1:
 
                     // Agrega un producto al carrito o coleccion del usuario
-                    System.out.println(" Ingresa el nombre de la categoria: ");
+                    System.out.println("Ingresa el nombre de la categoria: ");
                     String categoria = teclado.nextLine();
                     if(Inventario.containsKey(categoria)){
 
-                        System.out.println(" Ingresa el nombre del producto que deseas agregar: ");
+                        System.out.println("Ingresa el nombre del producto que deseas agregar: ");
                         String prod = teclado.nextLine();
 
                         String busqueda = prod;
@@ -178,16 +179,24 @@ public class Principal{
                 case 3:
 
                     //Muestra el carrito del usuario
-                    Map<String,Integer> conteo = new HashMap<>();
-                    for(List<String> valores : myCollection.values()){
-                        for(String valor : valores){
-                            Integer cont = conteo.get(valor);
-                        
-                            if(cont == null){
-                                cont = 0;
-                            }
-                            conteo.put(valor, cont + 1);
+                    System.out.println("\n");
 
+                    System.out.println(" Informacion del carrito actual ");
+                    for (Map.Entry<String, List<String>> entry : myCollection.entrySet()) {
+                        String llave = entry.getKey();
+                        List<String> valores = entry.getValue();
+                        System.out.println("\nCategoria: " + llave);
+
+                        Map<String, Integer> myProducts = new HashMap<>();
+                        for (String valor : valores) {
+                            int cant = myProducts.getOrDefault(valor, 0);
+                            myProducts.put(valor, cant + 1);
+                        }
+
+                        for (Map.Entry<String, Integer> values : myProducts.entrySet()) {
+                            String valor = values.getKey();
+                            int cant = values.getValue();
+                            System.out.println("  Producto: " + valor + "\nCantidad: " + cant);
                         }
                     }
 
@@ -195,27 +204,34 @@ public class Principal{
                 break;                
 
                 case 4:
-                    // Muestra el carrito del usuario donde las categorias estan ordenadas
-                    if(myCollection instanceof HashMap){
+                    
+                    //Muestra el carrito del usuario pero ordenado segun la categoria
+                    System.out.println("\n");
 
-                        Map<String, List<String>> ColeccionOrdenada = new TreeMap<String, List<String>>(myCollection);
-                        for (Map.Entry<String, List<String>> entry : ColeccionOrdenada.entrySet()) {
-                            System.out.println(entry.getKey()+" : "+entry.getValue());
+                    System.out.println(" Informacion del carrito actual ");
+
+                    List<Map.Entry<String, List<String>>> orderedCollection = new ArrayList<>(myCollection.entrySet());
+                    orderedCollection.sort(Comparator.comparing(Map.Entry::getKey));
+
+                    for (Map.Entry<String, List<String>> entry : orderedCollection) {
+
+                        String llave = entry.getKey();
+                        List<String> valores = entry.getValue();
+                        System.out.println("\nCategoria: " + llave);
+
+                        Map<String, Integer> myProducts = new HashMap<>();
+                        for (String valor : valores) {
+                            int cant = myProducts.getOrDefault(valor, 0);
+                            myProducts.put(valor, cant + 1);
                         }
+                        List<Map.Entry<String, Integer>> orderedProducts = new ArrayList<>(myProducts.entrySet());
+                        orderedProducts.sort(Comparator.comparing(Map.Entry::getKey));
 
-                    }else if(myCollection instanceof TreeMap){
-
-                        for (Map.Entry<String, List<String>> entry : myCollection.entrySet()) {
-                            System.out.println(entry.getKey()+" : "+entry.getValue());
+                        for (Map.Entry<String, Integer> values : orderedProducts) {
+                            String valor = values.getKey();
+                            int cant = values.getValue();
+                            System.out.println("  Producto: " + valor + "\nCantidad: " + cant);
                         }
-
-                    }else if(myCollection instanceof LinkedHashMap){
-
-                        Map<String, List<String>> ColeccionOrdenada = new TreeMap<String, List<String>>(myCollection);
-                        for (Map.Entry<String, List<String>> entry : ColeccionOrdenada.entrySet()) {
-                            System.out.println(entry.getKey()+" : "+entry.getValue());
-                        }
-                        
                     }
 
                 break;
